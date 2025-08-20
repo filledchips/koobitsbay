@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koobits Bay</title>
+<!-- Favicon -->
+<link rel="icon" href="https://cdn.discordapp.com/attachments/1385237206347812964/1407664067031601152/Untitled233_20250820175354.png?ex=68a6ecd2&is=68a59b52&hm=9b5a0c4a8efa2be7cf91081732f832f84c1402484250341076af94e1f0cfd937&" type="image/png">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 30px;
+        padding: 0;
+    }
+    img.thumbnail {
+        width: 150px;
+        height: 150px;
+        object-fit: contain; /* show entire image */
+        display: block;
+        margin: 0 auto 20px auto;
+        background-color: #f0f0f0;
+    }
+    #templateText a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        padding: 10px;
+        display: inline-block;
+        max-width: 90%;
+        word-wrap: break-word; /* allow wrapping */
+    }
+    select {
+        margin: 10px;
+        padding: 8px;
+        font-size: 16px;
+    }
+    small {
+        display: block;
+        margin-top: 30px;
+    }
+</style>
+</head>
+<body>
+
+<img class="thumbnail" src="https://cdn.discordapp.com/attachments/1385237206347812964/1407657884237693001/Untitled232_20250820171957.png?ex=68a6e710&is=68a59590&hm=59862484a0f105b5e061e23d2f9ce1ed7841a0cca446fbffb0767d6e4b2fd216&" alt="Thumbnail">
+
+<div id="templateText">
+    <a href="https://braingames.koobits.com/brain_games/blank/" target="_blank">
+        https://braingames.koobits.com/brain_games/blank/
+    </a>
+</div>
+
+<div>
+    <select id="categorySelect">
+        <option value="">Select Category</option>
+        <option value="sp">Speed</option>
+        <option value="at">Attention</option>
+        <option value="ps">Problem Solving</option>
+        <option value="mg">Memory</option>
+        <option value="fl">Flexibility</option>
+    </select>
+
+    <select id="gameSelect">
+        <option value="">Select Game</option>
+    </select>
+</div>
+
+<small><b>made by <a href="https://www.tiktok.com/@toodlesxrodgercan0n?_t=ZS-8z22siuhGuF&_r=1" target="_blank">koonomynous</a>, some links might not work, use this to p*rate brain games without Koko and play time. select a category, select a brain game, click the link. this is for educational* purposes obviously. (*for fun)</b></small>
+
+<script>
+const games = {
+    sp: ["brainspeed","defencemaths","mathsballgame","mathpopgame","mathsspeed","solvemaths","subimaths","truenumber"],
+    at: ["cubeninja","duckshoot","flapcat","fruitslasher","speedracer","spaceshoot","trexrunner","tankdefender"],
+    ps: ["battleshipwar","fishworldmatch","jellymatch","playfulkitty","plumber","swiftcats","tetriscube","ultimatesudoku","virusattack"],
+    mg: ["evenodd","flashmemory","memoryblock","memorygame","memoryorder","sequence","whatsinside"],
+    fl: ["brickout","earthattack","fishingfrenzy","goldminer","madshark","monstertruck","numberscastle","snakeandblocks"]
+};
+
+const baseUrl = "https://braingames.koobits.com/brain_games/";
+const categorySelect = document.getElementById("categorySelect");
+const gameSelect = document.getElementById("gameSelect");
+const templateLink = document.getElementById("templateText").querySelector("a");
+
+categorySelect.addEventListener("change", () => {
+    const category = categorySelect.value;
+    gameSelect.innerHTML = '<option value="">Select Game</option>';
+    if(category && games[category]) {
+        games[category].forEach(game => {
+            const opt = document.createElement("option");
+            opt.value = game;
+            opt.textContent = game;
+            gameSelect.appendChild(opt);
+        });
+        templateLink.textContent = `${baseUrl}${category}/`;
+        templateLink.href = `${baseUrl}${category}/`;
+    } else {
+        templateLink.textContent = `${baseUrl}blank/`;
+        templateLink.href = `${baseUrl}blank/`;
+    }
+});
+
+gameSelect.addEventListener("change", () => {
+    const category = categorySelect.value;
+    const game = gameSelect.value;
+    if(category && game) {
+        templateLink.textContent = `${baseUrl}${category}${game}/`;
+        templateLink.href = `${baseUrl}${category}${game}/`;
+    } else if(category) {
+        templateLink.textContent = `${baseUrl}${category}/`;
+        templateLink.href = `${baseUrl}${category}/`;
+    } else {
+        templateLink.textContent = `${baseUrl}blank/`;
+        templateLink.href = `${baseUrl}blank/`;
+    }
+});
+</script>
+
+</body>
+</html>
